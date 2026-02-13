@@ -1,3 +1,6 @@
+<?php
+// Dummy for pages
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,16 +12,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>REFALDI | WebDev School</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -31,11 +34,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">PHP crud <sup>pplg 2</sup></div>
+                <div class="sidebar-brand-text mx-3">PHP Crud <sup>pplg 2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -43,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="../index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -52,7 +55,7 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -71,13 +74,7 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Laporan</span>
-                </a>
-
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -103,8 +100,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                   
-
+                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -133,10 +129,10 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                     
-                        <!-- Nav Item - Messages -->
-                   
 
+
+                        <!-- Nav Item - Messages -->
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -145,12 +141,12 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                               
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -166,62 +162,61 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                
-                <h1 class="h3 mb-2 text-gray-800">Form tambah data siswa</h1>
-                <form method="POST" action="tsiswa.php">
-                <!-- <div class="row mb-3">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nomor</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="id" name="id">
+
+                     <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Tabel Siswa</h1>
+                    
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                        <a href="../forms/tambah_siswa.php" class="btn btn-primary">Tambah Siswa</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Kelamin</th>
+                                            <th>Tanggal Lahir</th>
+                                            <th>Kelas</th>
+                                            <th>Jurusan</th>
+                                            <th>Keterangan</th>
+                                            <th>Opsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        include '../koneksi.php';
+                                        $no = 1;
+                                        $data = mysqli_query($koneksi,"SELECT s.id, s.nama, s.jk, s.tgl_lahir, s.keterangan, k.nama_kelas, j.nama_jurusan FROM siswa s LEFT JOIN kelas k ON s.id_kelas = k.id_kelas LEFT JOIN jurusan j ON s.id_jurusan = j.id_jurusan");
+                                        while ($d = mysqli_fetch_array($data)){
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $d['nama']; ?></td>
+                                            <td><?php echo $d['jk']; ?></td>
+                                            <td><?php echo $d['tgl_lahir']; ?></td>
+                                            <td><?php echo $d['nama_kelas']; ?></td>
+                                            <td><?php echo $d['nama_jurusan']; ?></td>
+                                            <td><?php echo $d['keterangan']; ?></td>
+                                            <td>
+                                                <a href="../edit/edit_siswa.php?id=<?php echo $d['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                                <a href="../process/hapus_siswa.php?id=<?php echo $d['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div> -->
-                <div class="row mb-3">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nis</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nis" name="nis">
-                    </div>
-                <div class="row mb-3">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nama siswa</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nama" name="nama">
-                    </div>
-                <div class="row mb-3">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Jenis kelamin</label>
-                    <div class="col-sm-10">
-                    <input type="radio" class="form-control" id="jk" name="jk" value="L"> Laki-Laki
-                    <input type="radio" class="form-control" id="jk" name="jk" value="P"> Perempuan
-                    </div>
-                <div class="row mb-3">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Tanggal lahir</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="tgl_lahir" name="tgl_lahir">
-                    </div>
-                <div class="row mb-3"> 
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Kelas</label>
-                        <select class="form-control form-control-lg" id="kelas" name="kelas">
-                            <option>- pilih kelas-</option>
-                            <option>X</option>
-                            <option>XI</option>
-                            <option>XII</option>
-                        </select>
-                    </div> 
-                 <div class="row mb-3"> 
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Jurusan</label>
-                        <select class="form-control form-control-lg" id="jurusan" name="jurusan">
-                            <option>- pilih jurusan-</option>
-                            <option>PPLG</option>
-                            <option>TPFL</option>
-                            <option>TO</option>
-                            <option>BCF</option>
-                            <option>ANIMASI</option>
-                        </select> 
-                <div class="row mb-3">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Keterangan</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="keterangan" name="keterangan">
-                    </div>
-                <button type="submit" class="btn btn-primary">Tambah data</button>
-                </form>
+
+
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -233,7 +228,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Refaldi Ramadhan</span>
+                        <span>Copyright &copy; REFALDI | WebDev School</span>
                     </div>
                 </div>
             </footer>
@@ -271,14 +266,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 
